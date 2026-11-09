@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#355a49" />
+  <meta name="description" content="A gentle family scripture and poetry memory rotation that follows your school days." />
+  <title>The Recitation Companion — Scripture & Poetry</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="file-import" type="file" accept=".txt,.md,.csv,text/plain,text/markdown,text/csv" hidden />
+  <input id="backup-import" type="file" accept=".json,application/json" hidden />
+  <script src="app.js" defer></script>
+</body>
+</html>
