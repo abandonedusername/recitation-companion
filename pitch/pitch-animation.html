@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recitation Companion Pitch</title>
+<style>
+:root{--forest:#355a49;--forest-dark:#274536;--sage:#7c967f;--soft-green:#e8eee5;--cream:#f7f5ee;--paper:#fffefa;--ink:#2d3830;--muted:#788078;--gold:#b59b66;--rose:#f3e6e1;--border:#e4e6df}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#111;color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1920px;height:1080px;position:relative;background:radial-gradient(ellipse at 50% 35%,var(--paper) 0%,var(--cream) 70%);overflow:hidden;transform-origin:center}
+.scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease}
+.scene.on{opacity:1}
+.serif{font-family:Georgia,"Times New Roman",serif}
+h1{font-family:Georgia,serif;font-size:104px;font-weight:400;line-height:1.12;text-align:center;color:var(--forest-dark)}
+h2{font-family:Georgia,serif;font-size:70px;font-weight:400;line-height:1.15;color:var(--forest-dark)}
+em{color:var(--gold);font-style:italic}
+p.lead{font-size:38px;color:var(--muted);margin-top:28px;line-height:1.4}
+.rise{opacity:0;transform:translateY(34px)}
+.on .rise{animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.d1{animation-delay:.3s!important}.d2{animation-delay:.9s!important}.d3{animation-delay:1.5s!important}.d4{animation-delay:2.1s!important}.d5{animation-delay:2.7s!important}
+.split{display:flex;gap:110px;align-items:center;width:1620px}
+.split .copy{flex:1}
+.phone{width:540px;height:920px;border-radius:64px;background:var(--cream);border:2px solid var(--border);box-shadow:0 40px 110px rgba(50,68,52,.18),0 0 0 14px #fff;padding:54px 34px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.ph-head{font-family:Georgia,serif;font-size:40px;color:var(--forest-dark)}
+.ph-sub{font-size:22px;color:var(--muted);margin-top:-10px}
+.card{background:var(--paper);border:2px solid var(--border);border-radius:20px;padding:18px 22px;display:flex;gap:18px;align-items:flex-start;transition:background .4s,border-color .4s}
+.card .box{width:34px;height:34px;border-radius:10px;border:3px solid var(--sage);flex:none;margin-top:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;transition:background .3s}
+.card.done{background:var(--soft-green);border-color:var(--sage)}
+.card.done .box{background:var(--forest);border-color:var(--forest)}
+.card .tag{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.card .ttl{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-top:2px}
+.card .txt{font-family:Georgia,serif;font-style:italic;font-size:21px;color:var(--muted);margin-top:4px;line-height:1.35}
+.btn{margin-top:auto;text-align:center;font-size:28px;font-weight:700;padding:20px;border-radius:20px;background:var(--forest);color:#fff;transition:background .3s}
+.verse{font-family:Georgia,serif;font-style:italic;font-size:46px;color:var(--muted);text-align:center;line-height:1.5;margin-top:40px}
+/* ladder */
+.ladder{display:flex;align-items:center;gap:0;margin-top:170px;position:relative}
+.stage-pill{width:230px;height:130px;border-radius:24px;background:var(--paper);border:2px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:34px;color:var(--forest-dark);position:relative;z-index:1}
+.stage-pill small{font-family:ui-sans-serif,system-ui,sans-serif;font-size:18px;color:var(--muted);margin-top:6px}
+.arrow{width:70px;height:3px;background:var(--sage);position:relative}
+.arrow::after{content:"";position:absolute;right:-2px;top:-8px;border:9px solid transparent;border-left:12px solid var(--sage)}
+.token{position:absolute;top:-92px;width:200px;padding:12px 16px;border-radius:16px;background:var(--forest);color:#fff;font-family:Georgia,serif;font-size:22px;text-align:center;box-shadow:0 12px 30px rgba(39,69,54,.3);transition:left .9s cubic-bezier(.5,0,.2,1);z-index:2}
+.grid4{display:grid;grid-template-columns:repeat(2,600px);gap:32px;margin-top:56px}
+.tile{background:var(--paper);border:2px solid var(--border);border-radius:26px;padding:36px 40px;font-family:Georgia,serif;font-size:38px;color:var(--forest-dark)}
+.tile small{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:26px;color:var(--muted);margin-top:10px}
+.logo{width:180px;height:180px;border-radius:44px;margin:0 auto 46px;display:block;box-shadow:0 18px 60px rgba(53,90,73,.25)}
+.rule{width:120px;height:2px;background:var(--gold);margin:34px auto}
+/* controls */
+#hud{position:fixed;left:0;right:0;bottom:0;padding:14px 18px;display:flex;gap:14px;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,.6));opacity:.25;transition:opacity .3s}
+#hud:hover{opacity:1}
+#hud button{font:600 15px system-ui,sans-serif;color:#fff;background:#333;border:1px solid #555;border-radius:8px;padding:8px 14px;cursor:pointer}
+#prog{flex:1;height:6px;background:#444;border-radius:3px;cursor:pointer;position:relative}
+#prog i{position:absolute;left:0;top:0;bottom:0;background:var(--gold);border-radius:3px;width:0}
+#clock{font:14px ui-monospace,monospace;color:#ddd;min-width:90px;text-align:right}
+#start{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:5}
+#start button{font:700 28px Georgia,serif;padding:24px 48px;border-radius:999px;border:0;background:var(--forest);color:#fff;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.on .rise{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+
+  <section class="scene" id="s1" data-start="0" data-end="5.5">
+    <div>
+      <h1 class="rise">Some words are worth<br><em>keeping for life.</em></h1>
+      <div class="verse rise d3">"The Lord is my shepherd; I shall not want."<br><span style="font-size:30px;font-style:normal">Psalm 23:1</span></div>
+    </div>
+  </section>
+
+  <section class="scene" id="s2" data-start="5.5" data-end="9.5">
+    <div style="text-align:center">
+      <img class="logo rise" src="../icon-512.png" alt="">
+      <h1 class="rise d1">The Recitation Companion</h1>
+      <div class="rule rise d2"></div>
+      <p class="lead rise d2 serif" style="font-style:italic;margin-top:0">A living treasury of scripture &amp; poetry</p>
+    </div>
+  </section>
+
+  <section class="scene" id="s3" data-start="9.5" data-end="18">
+    <div class="split">
+      <div class="phone">
+        <div class="ph-head">Today</div>
+        <div class="ph-sub">Session 12 · scripture &amp; poetry</div>
+        <div class="card" id="c1"><div class="box">✓</div><div><div class="tag">Daily</div><div class="ttl">Psalm 23</div><div class="txt">He maketh me to lie down in green pastures…</div></div></div>
+        <div class="card" id="c2"><div class="box">✓</div><div><div class="tag">Even</div><div class="ttl">Who Has Seen the Wind?</div><div class="txt">Neither I nor you…</div></div></div>
+        <div class="card" id="c3"><div class="box">✓</div><div><div class="tag">Weekly 4</div><div class="ttl">Matthew 5:14–16</div><div class="txt">Ye are the light of the world…</div></div></div>
+        <div class="card" id="c4"><div class="box">✓</div><div><div class="tag">Monthly 12</div><div class="ttl">My Shadow</div><div class="txt">I have a little shadow that goes in and out with me…</div></div></div>
+        <div class="btn" id="finish">Finish session</div>
+      </div>
+      <div class="copy">
+        <h2 class="rise">Open it each morning.<br><em>Today's review is waiting.</em></h2>
+        <p class="lead rise d2">One new piece to learn, plus the right older ones to keep them fresh: odd and even days, weekly, monthly.</p>
+        <p class="lead rise d4">Check them off together, then finish the session.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s4" data-start="18" data-end="25">
+    <div style="text-align:center">
+      <h2 class="rise">Every piece climbs the ladder <em>at your pace.</em></h2>
+      <div class="ladder rise d1" id="ladder">
+        <div class="token" id="token">Psalm 23</div>
+        <div class="stage-pill">Daily<small>every session</small></div><div class="arrow"></div>
+        <div class="stage-pill">Odd / Even<small>every other</small></div><div class="arrow"></div>
+        <div class="stage-pill">Weekly<small>1 of 4</small></div><div class="arrow"></div>
+        <div class="stage-pill">Monthly<small>1 of 16</small></div><div class="arrow"></div>
+        <div class="stage-pill" style="border-color:var(--gold)">Kept<small>completed</small></div>
+      </div>
+      <p class="lead rise d3" style="margin-top:70px">You choose when a piece is ready to advance. Scripture and poetry run on separate tracks.</p>
+    </div>
+  </section>
+
+  <section class="scene" id="s5" data-start="25" data-end="29.5">
+    <div style="text-align:center">
+      <h2 class="rise">Missed a day? <em>Nothing slips.</em></h2>
+      <div class="grid4">
+        <div class="tile rise d1">Sessions, not dates<small>pick up right where you stopped</small></div>
+        <div class="tile rise d2">Long passages<small>split into stanzas you can group</small></div>
+        <div class="tile rise d3">No account<small>works offline, on any phone</small></div>
+        <div class="tile rise d4">Yours to keep<small>back up the whole library anytime</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s6" data-start="29.5" data-end="33.5">
+    <div style="text-align:center">
+      <img class="logo rise" src="../icon-512.png" alt="">
+      <h1 class="rise d1">Words worth learning.<br><em>Words worth keeping.</em></h1>
+      <p class="lead rise d2 serif">The Recitation Companion</p>
+    </div>
+  </section>
+
+</div></div>
+
+<div id="hud"><button id="playBtn">Pause</button><div id="prog"><i></i></div><div id="clock">0:00</div></div>
+<div id="start"><button>▶ Play pitch</button></div>
+
+<script>
+(function(){
+var DUR=33, stage=document.getElementById('stage'), scenes=[].slice.call(document.querySelectorAll('.scene'));
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='scale('+s+')'}
+addEventListener('resize',fit);fit();
+var t=0,playing=false,last=0;
+function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+var token=document.getElementById('token'),pills=document.querySelectorAll('.stage-pill');
+function scene3(lt){
+  ['c1','c2','c3','c4'].forEach(function(id,i){document.getElementById(id).classList.toggle('done',lt>2.2+i*1.1)});
+  var f=document.getElementById('finish'),fin=lt>7;
+  f.textContent=fin?'✓ Session 12 saved':'Finish session';f.style.background=fin?'var(--gold)':'var(--forest)';
+}
+function scene4(lt){
+  var step=Math.max(0,Math.min(4,Math.floor((lt-1.4)/1.2)));
+  var p=pills[step];token.style.left=(p.offsetLeft+p.offsetWidth/2-100)+'px';
+  token.textContent=step===4?'Psalm 23 · kept':'Psalm 23';
+}
+function render(){
+  scenes.forEach(function(s){var on=t>=+s.dataset.start&&t<+s.dataset.end;if(on!==s.classList.contains('on'))s.classList.toggle('on',on)});
+  if(t>=9.5&&t<18)scene3(t-9.5);
+  if(t>=18&&t<25)scene4(t-18);
+  document.querySelector('#prog i').style.width=(t/DUR*100)+'%';
+  document.getElementById('clock').textContent=fmt(t)+' / '+fmt(DUR);
+}
+function loop(now){if(!playing)return;t+=(now-last)/1000;last=now;if(t>=DUR){t=DUR;playing=false;document.getElementById('playBtn').textContent='Replay'}render();if(playing)requestAnimationFrame(loop)}
+function play(){if(t>=DUR)seek(0);playing=true;last=performance.now();document.getElementById('playBtn').textContent='Pause';requestAnimationFrame(loop)}
+function pause(){playing=false;document.getElementById('playBtn').textContent='Play'}
+function seek(x){t=x;scenes.forEach(function(s){s.classList.remove('on')});void stage.offsetWidth;render()}
+document.querySelector('#start button').onclick=function(){document.getElementById('start').remove();play()};
+document.getElementById('playBtn').onclick=function(){playing?pause():play()};
+document.getElementById('prog').onclick=function(e){var r=this.getBoundingClientRect();seek((e.clientX-r.left)/r.width*DUR)};
+addEventListener('keydown',function(e){if(e.code==='Space'){e.preventDefault();playing?pause():play()}});
+var m=location.hash.match(/t=([\d.]+)/); // #t=N : still frame, for previews
+if(m){document.getElementById('start').remove();document.getElementById('hud').style.display='none';t=+m[1];document.querySelectorAll('.rise').forEach(function(r){r.style.animation='none';r.style.opacity=1;r.style.transform='none'});scenes.forEach(function(s){s.style.transition='none'});token.style.transition='none';render()}
+else render();
+})();
+</script>
+</body>
+</html>
